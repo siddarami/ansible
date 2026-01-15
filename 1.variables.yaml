@@ -1,6 +1,6 @@
 
 - name: using variable
-  hosts: 54.226.64.129
+  hosts: localhost
   vars_files:
   - variables.yaml
   tasks:
