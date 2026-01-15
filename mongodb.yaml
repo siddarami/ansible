@@ -19,10 +19,14 @@
       state: started
       enabled: yes
 
-  - name: replace the ip address with 0.0.0.0
+  - name: replace with ip address
     ansible.builtin.replace:
       path: /etc/mongod.conf
       regexp: '127.0.0.1'
       replace: '0.0.0.0'
-      notify: restart mongod
+      
+
+
+
+
   
