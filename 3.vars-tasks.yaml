@@ -1,0 +1,16 @@
+
+- name: inherit the variables
+  hosts: localhost
+  vars:
+  - money: 1000
+    land: 1
+  tasks:
+  - name: print global variables
+    ansible.builtin.debug:
+      msg: "I have {{money}} and {{land}} "
+  vars:
+  - money: 2000
+  tasks:
+  - name: print inherit and localhost
+    ansible.builtin.debug:
+      msg: " have {{money}} and {{land}}"
