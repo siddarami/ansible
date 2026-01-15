@@ -1,6 +1,6 @@
 
 - name: prompt script
-  hosts:localhost
+  hosts: localhost
   vars_prompt:
   - name: username
     prompt: enter username
