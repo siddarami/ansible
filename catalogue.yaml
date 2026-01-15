@@ -29,58 +29,58 @@
       name: roboshop
     when: output.rc != 0
   
-- name: check the directory exists or not
-  ansible.builtin.stat:
-    path: /app
-    register: directory
-  when: directory.stat.exists == false
-  ansible.builtin.file:
-    path: /app
-    state: directory
+  - name: check the directory exists or not
+    ansible.builtin.stat:
+      path: /app
+      register: directory
+    when: directory.stat.exists == false
+    ansible.builtin.file:
+      path: /app
+      state: directory
   
-- name: copy the ger the url content
-  ansible.builtin.get_url:
-    url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
-    dest: /tmp
+  - name: copy the ger the url content
+    ansible.builtin.get_url:
+      url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
+      dest: /tmp
   
-- name: unarchive the file 
-  ansible.builtin.unarchive:
-    src: /tmp/catalogue.zip
-    dest: /app
-    remote_src: yes
+  - name: unarchive the file 
+    ansible.builtin.unarchive:
+      src: /tmp/catalogue.zip
+      dest: /app
+      remote_src: yes
   
-- name: install the dependencies
-  ansible.builtin.command: npm install 
-  args:
-     chdir: /app
+  - name: install the dependencies
+    ansible.builtin.command: npm install 
+      args: 
+        chdir: /app
 
-- name: copy the catalogue service
-  ansible.builtin.copy:
-    src: catalogue.service
-    dest: /etc/systemd/system/catalogue.service
+  - name: copy the catalogue service
+    ansible.builtin.copy:
+      src: catalogue.service
+      dest: /etc/systemd/system/catalogue.service
 
-- name: enable and start the catalogue service
-  ansible.builtin.systemd:
-    daemon_reload: true
+  - name: enable and start the catalogue service
+    ansible.builtin.systemd:
+      daemon_reload: true
   
-- name: copy the mongorepo to yum.repos.data
-  ansible.builtin.copy:
-    src: mongo.repo
-    dest: /etc/yum.repos.d/mongo.repo
+  - name: copy the mongorepo to yum.repos.data
+    ansible.builtin.copy:
+      src: mongo.repo
+      dest: /etc/yum.repos.d/mongo.repo
 
-- name: installing mongodb org 
-  ansible.builtin.yum:
-    name: mongodb-org
-    state: installed
+  - name: installing mongodb org 
+    ansible.builtin.yum:
+      name: mongodb-org
+      state: installed
   
-- name: install dependencies
-  ansible.builtin.command: mongo --host MONGODB-SERVER-IPADDRESS </app/schema/catalogue.js
+  - name: install dependencies
+    ansible.builtin.command: mongo --host MONGODB-SERVER-IPADDRESS </app/schema/catalogue.js
 
-- name: enable and start catalogue service
-  ansible.builtin.service:
-    name: catalogue
-    state: started
-    enabled: yes
+  - name: enable and start catalogue service
+    ansible.builtin.service:
+      name: catalogue
+      state: started
+      enabled: yes
 
 
 
