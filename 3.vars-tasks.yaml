@@ -7,10 +7,10 @@
   tasks:
   - name: print global variables
     ansible.builtin.debug:
-      msg: "I have {{money}} "
+      msg: "I have {{money}}"
   vars:
   - money: "2000"
   tasks:
   - name: print inherit 
     ansible.builtin.debug:
-      msg: " have {{money}} "
+      msg: " have {{money}}"
