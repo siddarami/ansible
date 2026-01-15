@@ -8,8 +8,9 @@
   - name: print global variables
     ansible.builtin.debug:
       msg: "I have {{money}}"
-  vars:
-  - money: "2000"
+  - name: override the variables
+    vars:
+    - money: "2000"
   tasks:
   - name: print inherit 
     ansible.builtin.debug:
