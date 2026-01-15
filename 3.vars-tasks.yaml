@@ -11,6 +11,6 @@
   vars:
   - money: 2000
   tasks:
-  - name: print inherit and localhost
+  - name: print inherit 
     ansible.builtin.debug:
       msg: " have {{money}} and {{land}}"
