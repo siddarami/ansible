@@ -1,0 +1,9 @@
+
+- name: using variable
+  hosts: 54.226.64.129
+  vars_files:
+  - variables.yaml
+  tasks:
+  - name: print variables
+    ansible.builtin.debug:
+      msg: "i am {{NAME}} and my course is {{course}}"
