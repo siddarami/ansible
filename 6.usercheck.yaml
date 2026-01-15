@@ -1,0 +1,25 @@
+#take user name as variable and create user if not exists or else skip 
+
+- name: create user
+  hosts: localhost
+  # vars:
+  #   username: roboshop 
+  tasks:
+  - name: check user exist 
+    ansible.builtin.command: id {{username}}
+    register: output
+    ignore_errors: yes
+  
+  - name: print command output
+    ansible.builtin.debug:
+      msg: "{{output}}"
+  
+  - name: print exit status
+    ansible.builtin.debug:
+      msg: "{{output.rc}}"
+  
+  - name: create the user
+    become: yes
+    ansible.builtin.user:
+      name: "{{username}}"
+    when: output.rc != 0

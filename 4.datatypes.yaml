@@ -1,0 +1,20 @@
+
+- name: to identify the data types
+  hosts: localhost
+  vars:
+  - age: 27
+  - name: "reddy"
+  -skills:
+    - devops
+    - aws
+  experience:
+    - devops: 3
+    - aws: 2
+  tasks:
+  - name: print integer date types
+    ansible.builtin.debug:
+      msg: "age {{age}}
+  - name: print string data types
+    ansible.builtin.debug:
+      msg: "name {{name}}"
+  "

@@ -1,0 +1,22 @@
+
+- name: creatin user
+  hosts: localhost
+  tasks:
+  - name: check the user
+    ansible.builtin.commnad: id roboshop
+    register: output 
+    ignore_errors: yes
+  
+  - name: print the command output
+    ansible.builtin.debug:
+      msg: "{{output}}"
+  
+  - name: print exist status
+    ansible.builtin.debug:
+      msg: "{{output.rc}}"
+
+  - name: create the user
+    become: yes
+    ansible.builtin.user:
+      name: roboshop
+    when: output.rc != 0
